@@ -4,9 +4,7 @@ import com.assignment.gesipan.dto.BoardDto;
 import com.assignment.gesipan.service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,4 +50,26 @@ public class BoardController {
         //model을 통해 boardDto 타입의 데이터를 View에 전달해준다.
         return "board/detail.html";
     }
+    //디테일 페이지에서 썼던 getPost를 그대로 사용한다. 이전 데이터 값을 유지한 상태에서 수정된 부분만 다시 저장해야하기 때문이다.
+    @GetMapping("/post/edit/{no}")
+    public String edit(@PathVariable("no") Long id, Model model) {
+        BoardDto boardDto = boardService.getPost(id);
+
+        model.addAttribute("boardDto", boardDto);
+        return "board/update.html";
+    }
+    @PutMapping("/post/edit/{no}")
+    public String update(BoardDto boardDto) {
+            //글쓰기를 구현할 때, 구현했던 savePost를 이용하여 DB에 새로 저장을 한다.
+            boardService.savePost(boardDto);
+            return "redirect:/";
+    }
+    //디테일 페이지에서 삭제 버튼을 누르면 '/post/id값'으로 delete 요청이 들어온다
+    @DeleteMapping("/post/{no}")
+    public String delete(@PathVariable("no") Long id) {
+        boardService.deletePost(id);
+
+        return "redirect:/";
+    }
+
 }

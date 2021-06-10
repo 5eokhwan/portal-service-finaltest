@@ -49,8 +49,13 @@ public class BoardService {
         Board board = boardWrapper.get();
 
         BoardDto boardDto = BoardDto.builder().id(board.getId()).title(board.getTitle())
-                .content(board.getWriter()).writer(board.getWriter()).createdDate(board.getCreatedDate()).build();
+                .content(board.getContent()).writer(board.getWriter()).createdDate(board.getCreatedDate()).build();
 
         return boardDto;
+    }
+
+    @Transactional
+    public void deletePost(Long id) {
+        boardRepository.deleteById(id);
     }
 }
