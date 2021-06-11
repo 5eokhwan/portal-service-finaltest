@@ -10,6 +10,7 @@ import java.util.List;
 
 @Controller
 public class BoardController {
+
     private BoardService boardService;
 
     public BoardController(BoardService boardService) {
@@ -19,15 +20,9 @@ public class BoardController {
     //BoardDto를 이용해 DB에 저장된 데이터를 List로 불러올 것이다. 실제 로직은 Service에서 구현해준다.
     //만든 List를 boardList 라는 이름으로 View에 전달해준다.
     @GetMapping("/")
-    //@RequestParam으로 page값을 받음 (디폴트 1)
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
-        List<BoardDto> boardDtoList = boardService.getBoardlist(pageNum);
-        //pageList - 게시글 수로 페이지 목록 수 결정 (service서 구현)
-        Integer[] pageList = boardService.getPageList(pageNum);
-
+    public String list(Model model) {
+        List<BoardDto> boardDtoList = boardService.getBoardlist();
         model.addAttribute("boardList", boardDtoList);
-        model.addAttribute("pageList", pageList);
-
         return "board/list.html";
     }
 

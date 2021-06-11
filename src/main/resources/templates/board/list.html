@@ -7,7 +7,7 @@
 <body>
 <div th:insert="common/nav.html"></div>
 
-<div id="wrap" class="w-75 mx-auto">
+<div id="wrap">
     <table class="table table-hover">
         <thead>
         <tr>
@@ -37,11 +37,12 @@
         </tr>
         </tbody>
     </table>
-    <div id="paging" style="display: flex; justify-content: center">
-        <div th:each="pageNum : ${pageList}" th:inline="text" class="mx-1">
-            <!--page 링크를 누르면, Get요청으로 page값을 넘겨줌-->
-            <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
-        </div>
+
+
+    <div>
+    <span th:each="pageNum : ${pageList}" th:inline="text">
+        <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+    </span>
     </div>
 </div>
 <!--스크립트-->
