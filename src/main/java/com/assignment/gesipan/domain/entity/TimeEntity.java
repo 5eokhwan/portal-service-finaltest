@@ -12,8 +12,8 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @Getter
-@MappedSuperclass //테이블로 매핑하지 않고 자식 entity에게 매핑정보를 상속하기 위한 에노테이션
-@EntityListeners(AuditingEntityListener.class) //JPA에게 해당 Entity는 Auditing기능을 사용한다는 것을 알리는 에노테이션
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public class TimeEntity {
     @CreatedDate
     @Column(updatable = false)
@@ -22,4 +22,3 @@ public class TimeEntity {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 }
-//extends하고 있는 TimeEntity는 데이터 조작 시 자동으로 날짜를 수정해주는 JPA의 Auditing 기능을 사용하는 entity이다.

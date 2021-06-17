@@ -32,6 +32,3 @@ public class BoardDto {
         this.modifiedDate = modifiedDate;
     }
 }
-    //Controller와 Service 사이에서 데이터를 주고 받는 DTO를 구현해줘야한다.
-   //     DTO를 통해 service의 savePost에서 Repository에 데이터를 집어넣는다.
-//toEntity()는 dto에서 필요한 부분을 빌더패턴을 통해 entity로 만드는 역할이다.

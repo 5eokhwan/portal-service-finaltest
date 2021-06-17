@@ -5,16 +5,29 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{'/post/edit/' + ${boardDto.id}}" method="post">
-    <input type="hidden" name="_method" value="put"/>
-    <input type="hidden" name="id" th:value="${boardDto.id}"/>
+<div th:insert="common/nav.html"></div>
+<div id="wrap" style="margin: 20px">
+    <form th:action="@{'/post/edit/' + ${boardDto.id}}" method="post">
+        <input type="hidden" name="_method" value="put"/>
+        <input type="hidden" name="id" th:value="${boardDto.id}"/>
 
-    제목 : <input type="text" name="title" th:value="${boardDto.title}"> <br>
-    작성자 : <input type="text" name="writer" th:value="${boardDto.writer}"> <br>
-    <textarea name="content" th:text="${boardDto.content}"></textarea><br>
+        <div class="mb-3">
+            <label for="titleInput" class="form-label">title</label>
+            <input type="text" class="form-control" id="titleInput" name="title" th:value="${boardDto.title}">
+        </div>
 
-    <input type="submit" value="수정">
-</form>
+        <div class="mb-3">
+            <label for="writerInput" class="form-label">writer</label>
+            <input type="text" class="form-control" id="writerInput" name="writer" th:value="${boardDto.writer}">
+        </div>
+        <div class="mb-3">
+            <label for="contentInput" class="form-label">content</label>
+            <textarea name="content" class="form-control" id="contentInput" th:text="${boardDto.content}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+<div th:insert="common/script.html" id="scriptHtml"></div>
 
 </body>
 </html>
